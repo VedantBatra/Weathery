@@ -97,10 +97,13 @@ class WeatherViewController: UIViewController , CLLocationManagerDelegate , chan
         weatherDataModel.temp = Int(tempResult - 273.15)
         
         weatherDataModel.city = json["name"].stringValue
-        
-        weatherDataModel.condition = (json["Weather"][0]["id"]).intValue
+            print(".............................",weatherDataModel.city)
+
+        weatherDataModel.condition = json["weather"][0]["id"].intValue
+            print(".............................",weatherDataModel.condition)
         
         weatherDataModel.weatherIconName = weatherDataModel.updateWeatherIcon(condition: weatherDataModel.condition)
+        print(".............................",weatherDataModel.weatherIconName)
         
         
         updateUIWithWeatherData()
@@ -140,8 +143,8 @@ class WeatherViewController: UIViewController , CLLocationManagerDelegate , chan
         
         let location = locations[locations.count - 1]
         if location.horizontalAccuracy > 0 {
-            locationManager.stopUpdatingLocation()
-            locationManager.delegate = nil
+            self.locationManager.stopUpdatingLocation()
+            //locationManager.delegate = nil
             let longitude = String(location.coordinate.longitude)
             let latitude = String(location.coordinate.latitude)
             print(longitude,"Hello world")
